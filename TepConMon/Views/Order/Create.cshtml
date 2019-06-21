@@ -1,0 +1,42 @@
+﻿@model TepConMon.Models.Order
+@using TepConMon.Models
+
+@{
+    ViewBag.Title = "Добавить заказ";
+}
+
+<h2>Добавить заказ</h2>
+
+@using (Html.BeginForm())
+{
+    <h3>Заказ</h3>
+
+    <b>Номер заказа</b>
+    @Html.EditorFor(model => model.Number) 
+    
+    <br />
+
+    <b>Заказчик</b>
+    @Html.DropDownListFor(model => model.ZakazchikId, ViewBag.Zakazhiki as SelectList) 
+    
+    <br />
+
+    <b>Работы</b>
+    foreach (Work w in ViewBag.Works)
+    {
+        <input type="checkbox" name="selWork" value="@w.Id" />@w.Name <br />
+    }
+
+    <br />
+
+    <b>Материалы</b>
+    foreach (Material m in ViewBag.Materials)
+    {
+        <input type="checkbox" name="selMat" value="@m.Id" />@m.Name <br />
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
