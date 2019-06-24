@@ -1,0 +1,37 @@
+﻿@model TepConMon.Models.Zakazchik
+@using TepConMon.Models
+
+@{
+    /**/
+
+    ViewBag.Title = "Детали: заказчик";
+}
+
+<h2>Информация о заказчике</h2>
+
+<div class="display-label"><b>Название организации</b></div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Name)
+</div>
+
+<div class="display-label"><b>Адрес электронной почты</b></div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Email)
+</div>
+
+<div class="display-label"><b>Юридический адрес организации</b></div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Address)
+</div>
+
+<div class="display-label"><b>Заказы</b></div>
+<ul>
+    @foreach (Order o in Model.Orders)
+    {
+        <li>@o.Number</li>
+    }
+</ul>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>

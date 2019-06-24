@@ -15,5 +15,59 @@ namespace TepConMon.Controllers
         {
             return View(db.Materials.ToList());
         }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Material material)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Materials.Add(material);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Material material = db.Materials.Find(id);
+            if (material == null)
+            {
+                return HttpNotFound();
+            }
+            return View(material);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Material material = db.Materials.Find(id);
+            if(material == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(material);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Material material)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

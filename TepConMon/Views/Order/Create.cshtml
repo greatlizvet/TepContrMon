@@ -34,7 +34,13 @@
     {
         <input type="checkbox" name="selMat" value="@m.Id" />@m.Name <br />
     }
+
+    <input type="submit" value="Create"/>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 
 @section Scripts {

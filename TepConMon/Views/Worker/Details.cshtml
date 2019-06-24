@@ -1,0 +1,28 @@
+﻿@model TepConMon.Models.Worker
+@using TepConMon.Models
+@{
+                ViewBag.Title = "Детали: работник";
+}
+
+<h2>Информация о работнике</h2>
+
+<div class="display-label"><b>ФИО</b></div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Name)
+</div>
+
+<div class="display-label"><b>Должность</b></div>
+<div class="display-field">
+    @Html.DisplayFor(model => model.Position)
+</div>
+<div class="display-label"><b>Исполняемые работы</b></div>
+<ul>
+    @foreach (Work w in Model.Works)
+    {
+        <li>@w.Name</li>
+    }
+</ul>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>

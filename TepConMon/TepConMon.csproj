@@ -139,6 +139,10 @@
     <Compile Include="Migrations\201906210444297_InitialCreate.Designer.cs">
       <DependentUpon>201906210444297_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906240247529_AddDataAnnot.cs" />
+    <Compile Include="Migrations\201906240247529_AddDataAnnot.Designer.cs">
+      <DependentUpon>201906240247529_AddDataAnnot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\Order.cs" />
@@ -191,6 +195,15 @@
     <Content Include="Views\Worker\Index.cshtml" />
     <Content Include="Views\Work\Index.cshtml" />
     <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\Material\Create.cshtml" />
+    <Content Include="Views\Worker\Create.cshtml" />
+    <Content Include="Views\Zakazchik\Create.cshtml" />
+    <Content Include="Views\Work\Create.cshtml" />
+    <Content Include="Views\Material\Details.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Work\Details.cshtml" />
+    <Content Include="Views\Worker\Details.cshtml" />
+    <Content Include="Views\Zakazchik\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -211,6 +224,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201906210444297_InitialCreate.resx">
       <DependentUpon>201906210444297_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906240247529_AddDataAnnot.resx">
+      <DependentUpon>201906240247529_AddDataAnnot.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

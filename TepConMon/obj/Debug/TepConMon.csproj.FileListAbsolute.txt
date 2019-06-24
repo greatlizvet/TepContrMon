@@ -87,3 +87,4 @@ F:\Projects\Sharp\TepConMon\TepConMon\obj\Debug\TepConMon.dll
 F:\Projects\Sharp\TepConMon\TepConMon\obj\Debug\TepConMon.pdb
 F:\Projects\Sharp\TepConMon\TepConMon\obj\Debug\TepConMon.Migrations.InitialCreate.resources
 F:\Projects\Sharp\TepConMon\TepConMon\obj\Debug\TepConMon.csproj.GenerateResource.cache
+F:\Projects\Sharp\TepConMon\TepConMon\obj\Debug\TepConMon.Migrations.AddDataAnnot.resources

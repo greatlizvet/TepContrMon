@@ -1,0 +1,31 @@
+﻿@model TepConMon.Models.Work
+@using TepConMon.Models
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Добавить работу</h2>
+
+@using (Html.BeginForm())
+{
+    <h3>Работа</h3>
+
+    <b>Название деятельности</b>
+    @Html.EditorFor(model => model.Name)
+
+    <br />
+
+    <b>Описание</b>
+    @Html.EditorFor(model => model.Description)
+
+    <br />
+
+    <b>Работники</b>
+    foreach (Worker w in ViewBag.Workers)
+    {
+        <input type="checkbox" name="selWorkers" value="@w.Id" />@w.Name <br />
+    }
+
+    <input type="submit" value="Create" />
+}

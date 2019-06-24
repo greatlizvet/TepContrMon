@@ -52,5 +52,20 @@ namespace TepConMon.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Details(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Order order = db.Orders.Find(id);
+            if(order == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(order);
+        }
     }
 }
