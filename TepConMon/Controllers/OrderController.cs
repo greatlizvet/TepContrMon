@@ -67,5 +67,71 @@ namespace TepConMon.Controllers
 
             return View(order);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Order order = db.Orders.Find(id);
+            if(order == null)
+            {
+                return HttpNotFound();
+            }
+            SelectList zakazchiki = new SelectList(db.Zakazchiks, "Id", "Name");
+            ViewBag.Zakazhiki = zakazchiki;
+            ViewBag.Works = db.Works.ToList();
+            ViewBag.Materials = db.Materials.ToList();
+
+            return View(order);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Order order, int[] selWork, int[] selMat)
+        {
+            Order newOrder = db.Orders.Find(order.Id);
+            newOrder.Number = order.Number;
+            newOrder.ZakazchikId = order.ZakazchikId;
+
+            newOrder.Materials.Clear();
+            if (selMat != null)
+            {
+                foreach (var m in db.Materials.Where(ma => selMat.Contains(ma.Id)))
+                {
+                    newOrder.Materials.Add(m);
+                }
+            }
+
+            newOrder.Works.Clear();
+            if (selWork != null)
+            {
+                foreach (var w in db.Works.Where(wo => selWork.Contains(wo.Id)))
+                {
+                    newOrder.Works.Add(w);
+                }
+            }
+
+            db.Entry(newOrder).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Order order = db.Orders.Find(id);
+            if (order != null)
+            {
+                db.Orders.Remove(order);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

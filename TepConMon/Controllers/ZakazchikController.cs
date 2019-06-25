@@ -48,5 +48,46 @@ namespace TepConMon.Controllers
 
             return View(zakazchik);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Zakazchik zakazchik = db.Zakazchiks.Find(id);
+            if (zakazchik == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(zakazchik);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Zakazchik zakazchik)
+        {
+            db.Entry(zakazchik).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Zakazchik zakazchik = db.Zakazchiks.Find(id);
+            if (zakazchik != null)
+            {
+                db.Zakazchiks.Remove(zakazchik);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

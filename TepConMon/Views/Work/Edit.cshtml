@@ -1,0 +1,33 @@
+﻿@model TepConMon.Models.Work
+@using TepConMon.Models
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    <h3>Заказ</h3>
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="editor-label"><b>Наименование деятельности</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div class="editor-label"><b>Описание</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Description)
+    </div>
+    <div class="editor-label"><b>Материалы</b></div>
+    foreach (Worker w in ViewBag.Workers)
+    {
+        <input type="checkbox" name="selWorkers" value="@w.Id"
+               @(Model.Workers.Contains(w) ? "checked=\"checked\"" : "") />@w.Name <br />
+    }
+            <p>
+                <input type="submit" value="Сохранить" />
+            </p>
+        }

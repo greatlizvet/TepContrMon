@@ -67,6 +67,24 @@ namespace TepConMon.Controllers
         [HttpPost]
         public ActionResult Edit(Material material)
         {
+            db.Entry(material).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Material material = db.Materials.Find(id);
+            if(material != null)
+            {
+                db.Materials.Remove(material);
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
     }

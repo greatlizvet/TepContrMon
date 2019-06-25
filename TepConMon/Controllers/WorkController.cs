@@ -56,5 +56,62 @@ namespace TepConMon.Controllers
             }
             return View(work);
         }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return HttpNotFound();
+            }
+            Work work = db.Works.Find(id);
+            if(work == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Workers = db.Workers.ToList();
+            return View(work);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Work work, int[] selWorkers)
+        {
+            if(ModelState.IsValid)
+            {
+                Work newWork = db.Works.Find(work.Id);
+                newWork.Name = work.Name;
+                newWork.Description = work.Description;
+
+                newWork.Workers.Clear();
+                if (selWorkers != null)
+                {
+                    foreach (var w in db.Workers.Where(wo => selWorkers.Contains(wo.Id)))
+                    {
+                        newWork.Workers.Add(w);
+                    }
+                }
+                db.Entry(newWork).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Work work = db.Works.Find(id);
+            if (work != null)
+            {
+                db.Works.Remove(work);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

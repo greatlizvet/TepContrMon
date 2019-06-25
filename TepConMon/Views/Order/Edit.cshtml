@@ -1,0 +1,39 @@
+﻿@model TepConMon.Models.Order
+@using TepConMon.Models
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    <h3>Заказ</h3>
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="editor-label"><b>Номер заказа</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Number)
+    </div>
+
+    <div class="editor-label"><b>Заказчик</b></div>
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.ZakazchikId, ViewBag.Zakazhiki as SelectList)
+    </div>
+    <div class="editor-label"><b>Материалы</b></div>
+    foreach (Material m in ViewBag.Materials)
+    {
+        <input type="checkbox" name="selMat" value="@m.Id"
+               @(Model.Materials.Contains(m) ? "checked=\"checked\"" : "") />@m.Name <br />
+    }
+    <div class="editor-label"><b>Работы</b></div>
+    foreach (Work w in ViewBag.Works)
+    {
+        <input type="checkbox" name="selWork" value="@w.Id"
+               @(Model.Works.Contains(w) ? "checked=\"checked\"" : "") />@w.Name <br />
+    }
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    }
